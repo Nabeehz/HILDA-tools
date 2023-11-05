@@ -24,6 +24,10 @@ f_HILDA_parquet <-
              str_glue("{ftype}_{letter}{release}.dta")
         )
       ) %>% 
+      # Remove variable labels
+      zap_label() %>% 
+      # Remove value labels
+      zap_labels() %>% 
       # Remove wave prefix
       rename_with(str_sub, start = 2L, .cols = -c("xwaveid","xhhraid")) %>%
       # Add wave number
